@@ -6,11 +6,11 @@ import { zSchema } from "../../../../../lib/zodSchema";
 import OTPModel from "../../../../../models/Otp.model";
 import userModel from "../../../../../models/User.model";
 
-export async function POST(params) {
+export async function POST(request) {
     try {
         await connectDB()
 
-        const payload = request.json();
+        const payload = await request.json();
 
         const validateSchema = zSchema.pick({
             email: true
@@ -18,10 +18,10 @@ export async function POST(params) {
 
         const validatedData = validateSchema.safeParse(payload)
 
-        if(!validatedData){
+        if(!validatedData.success){
             return response(false,401,"Invalid or missing email address", validatedData.error)
         }
-
+        console.log(validatedData.data)
         const {email} = validatedData.data;
 
         const getUser = await userModel.findOne({deletedAt: null , email}).lean

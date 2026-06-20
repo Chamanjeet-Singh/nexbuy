@@ -1,9 +1,8 @@
-import { connectDB } from "../../../../../lib/dbConnect";
+import { connectDB } from "../../../../../lib/dbConnect"
 import { catchError, response } from "../../../../../lib/helperFunction";
 import { zSchema } from "../../../../../lib/zodSchema";
 import userModel from "../../../../../models/User.model";
-
-export async function PUT(params) {
+export async function PUT(request) {
     try {
         await connectDB();
 
@@ -15,21 +14,21 @@ export async function PUT(params) {
 
         const validatedData = validateSchema.safeParse(payload);
 
-        if(!validatedData){
+        if(!validatedData.success){
             return response(false,401,"Invalid or missing email address", validatedData.error)
             
         }
 
-        const {email, password} = validatedData
+        const {email, password} = validatedData.data
 
-        const getUser = userModel.findOne({deletedAt:null , email}).select("+password")
+        const getUser = await userModel.findOne({deletedAt:null , email}).select("+password")
 
         if(!getUser){
             return response(false,401,"User not Found")
         }
 
-       getUser.password = password
-       await getUser.save()
+       getUser.password = password;
+       await getUser.save();
 
         return response(true, 201, "Password updated Successfully")
 

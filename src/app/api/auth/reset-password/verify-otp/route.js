@@ -1,10 +1,8 @@
-import { SignJWT } from "jose";
-import { connectDB } from "../../../../lib/dbConnect";
-import { catchError, response } from "../../../../lib/helperFunction";
-import { zSchema } from "../../../../lib/zodSchema";
-import OTPModel from "../../../../models/Otp.model";
-import {cookies} from "next/headers";
-import userModel from "../../../../models/User.model";
+import { connectDB } from "../../../../../lib/dbConnect"
+import { catchError, response } from "../../../../../lib/helperFunction";
+import { zSchema } from "../../../../../lib/zodSchema";
+import OTPModel from "../../../../../models/Otp.model";
+import userModel from "../../../../../models/User.model";
 
 
 export async function POST(request) {

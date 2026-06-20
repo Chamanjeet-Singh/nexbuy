@@ -41,13 +41,17 @@ import { catchError, response } from "../../../../lib/helperFunction"
 import OTPVerification from '../../../../components/Application/OTPVerification'
 import {useDispatch} from "react-redux"
 import { login } from '../../../../../store/reducer/authReducer'
-import { WEBSITE_RESET_PASSWORD } from '../../../../routes/WebsiteRoute'
+import { USER_DASHBOARD, WEBSITE_RESET_PASSWORD } from '../../../../routes/WebsiteRoute'
+import { useSearchParams, useRouter} from "next/navigation"
+import { ADMIN_DASHBOARD } from '../../../../routes/AdminPanelRoute'
 
 
 
 const LoginPage = () => {
 
   const dispatch = useDispatch()
+  const searchParams = useSearchParams()
+  const router = useRouter()
   const[loading,setLoading] = useState(false)
   const[otpVerificationLoading,setOtpVerificationLoading] = useState(false)
   const[isTypePassword, setIsTypePassword] = useState(true)
@@ -102,6 +106,13 @@ const LoginPage = () => {
       showToast("success",otpResponse.message)
 
       dispatch(login(otpResponse.data))
+
+      if(searchParams.has("callback")){
+        router.push(searchParams.get("callback"))
+
+      }else{
+        otpResponse.data.role == "admin" ? router.push(ADMIN_DASHBOARD): router.push(USER_DASHBOARD)
+      }
       
     } catch (error) {
       showToast("error",error.message)

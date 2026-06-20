@@ -35,6 +35,7 @@ import { showToast } from '../../../../lib/showToast'
 import { WEBSITE_LOGIN } from '@/routes/WebsiteRoute'
 import UpdatePassword from '../../../../components/Application/UpdatePassword'
 import axios from 'axios'
+import OTPVerification from '../../../../components/Application/OTPVerification'
 
 
 
@@ -61,7 +62,7 @@ const ResetPassword = () => {
     })
 
 
-    const handleEmailVerification = async () => {
+    const handleEmailVerification = async (values) => {
 
       try {
       setEmailVerificationLoading(true)

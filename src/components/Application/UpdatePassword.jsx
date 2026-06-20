@@ -69,7 +69,7 @@ const UpdatePassword = ({email}) => {
   const handlePasswordUpdate = async (values) => {
     try {
       setLoading(true)
-      const {data: passwordUpdate} = await axios.post("/api/auth/reset-password/update-password",values)
+      const {data: passwordUpdate} = await axios.put("/api/auth/reset-password/update-password",values)
 
       if(!passwordUpdate.success)
         throw new Error(passwordUpdate.message)
@@ -89,8 +89,8 @@ const UpdatePassword = ({email}) => {
   }
 
   return (
-    <Card>
-        <CardContent className="w-[400px]">
+    
+        <div >
            
             <div className="text-center mb-8 mt-4">
                 <h1 className='text-3xl font-bold'>Update Password</h1>
@@ -171,8 +171,8 @@ const UpdatePassword = ({email}) => {
           
         </form>
             </div>
-        </CardContent>
-    </Card>
+        </div>
+    
   )
 }
 

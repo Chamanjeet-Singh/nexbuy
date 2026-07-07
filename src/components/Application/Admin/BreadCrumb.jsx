@@ -17,20 +17,21 @@ const BreadCrumb = ({breadcrumbData}) => {
         return (
             index !== breadcrumbData.length-1
             ? 
-            <div key={index} className='flex-items-center'>
+            <React.Fragment key={index} >
                 <BreadcrumbItem >
                     <BreadcrumbLink href={data.href}>{data.label}
                     </BreadcrumbLink>
-                    <BreadcrumbSeparator/>
+                    
                 </BreadcrumbItem>
-            </div>
+                <BreadcrumbSeparator/>
+            </React.Fragment>
             :
-            <div key={index} className='flex-items-center'>
+            <React.Fragment key={index} >
                 <BreadcrumbItem>
                     <BreadcrumbLink href={data.href}>{data.label}
                     </BreadcrumbLink>
                 </BreadcrumbItem>
-            </div>
+            </React.Fragment>
         )
     })}
   </BreadcrumbList>

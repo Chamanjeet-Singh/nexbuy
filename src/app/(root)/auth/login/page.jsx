@@ -37,7 +37,6 @@ import LoadingButton from '../../../../components/Application/LoadingButton'
 import { WEBSITE_REGISTER } from '@/routes/WebsiteRoute'
 import { showToast } from '../../../../lib/showToast'
 import axios from 'axios'
-import { catchError, response } from "../../../../lib/helperFunction"
 import OTPVerification from '../../../../components/Application/OTPVerification'
 import {useDispatch} from "react-redux"
 import { login } from '../../../../../store/reducer/authReducer'

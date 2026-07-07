@@ -11,6 +11,7 @@ import OTPModel from "../../../../models/Otp.model";
 import { generateOtp } from "../../../../lib/helperFunction";
 import { catchError, response } from "../../../../lib/helperFunction"
 import { otpEmail } from "../../../../email/otpEmail"
+import mongoose from "mongoose";
 
 
 export async function POST(request) {
@@ -78,8 +79,11 @@ export async function POST(request) {
         const newOtpData = new OTPModel({
             email, otp
         })
+        console.log("newOtpData", newOtpData)
+
+        await newOtpData.save();
+        console.log("FULL CONNECTION STRING CHECK:");
         
-        await newOtpData.save()
 
 
         const otpEmailStatus = sendMail("Your Login Verificaition Code", email, otpEmail(otp));

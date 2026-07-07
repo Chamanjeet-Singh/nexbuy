@@ -1,8 +1,80 @@
+"use client"
 import React from 'react'
 
-const UploadMedia = () => {
+import { CldUploadWidget } from 'next-cloudinary';
+import { FiPlus } from "react-icons/fi";
+import { Button } from "@/components/ui/button"
+import { showToast } from '../../../lib/showToast';
+import axios from 'axios'
+
+
+const UploadMedia = ({isMultiple}) => {
+
+    const handleOnError = (error) => {
+        showToast("error", error.statusText)
+
+    }
+
+    const handleOnQueueEnd = async (results) => {
+    console.log("Queue Ended", results)
+        const files = results.info.files
+        const uploadedFiles = files.filter(file => file.uploadInfo).map(file => ({
+            asset_id: file.uploadInfo.asset_id,
+            public_id: file.uploadInfo.public_id,
+            secure_url: file.uploadInfo.secure_url,
+            path: file.uploadInfo.path,
+            thumbnail_url: file.uploadInfo.thumbnail_url
+        }))
+
+        if(uploadedFiles.length > 0 ){
+            try {
+                const {data: mediaUploadResponse} = await axios.post("/api/media/create", uploadedFiles)
+                if(!mediaUploadResponse.success){
+                    throw new Error(mediaUploadResponse.message)
+                }
+
+                showToast("success", mediaUploadResponse.message)
+            } catch (error) {
+                showToast("error", error.message)
+            }
+        }
+    }
   return (
-    <div>UploadMedia</div>
+    <CldUploadWidget
+        signatureEndpoint = "/api/cloudinary-signature"
+        uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+        onError={handleOnError}
+        onSuccess={(result) => {
+        console.log("Upload success:", result)  // ← add this temporarily
+    }}
+        onQueuesEnd={handleOnQueueEnd}
+        config={{
+            cloud: {
+                cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+                apiKey: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY
+
+            }
+            
+        }}
+
+        options={{
+            multiple: isMultiple,
+            sources: ["local", "url","unsplash","google_drive"]
+        }}
+    >
+
+
+        {({ open }) => {
+            return (
+            <button className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 cursor-pointer transition-colors"
+             onClick={() => open()}>
+                <FiPlus/>
+                    Upload Media
+            </button>
+            );
+        }}
+        
+    </CldUploadWidget>
   )
 }
 

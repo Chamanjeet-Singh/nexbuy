@@ -1,4 +1,4 @@
-import mongoose, { mongo, Mongoose } from "mongoose"
+import mongoose, {  Mongoose } from "mongoose"
 
 const otpSchema = new mongoose.Schema({
     email: {
@@ -20,6 +20,7 @@ const otpSchema = new mongoose.Schema({
 // as soon as time end the otp expires and data get automatically delete 
 
 otpSchema.index({expiredAt:1},{expireAfterSeconds: 0})
+
 
 const OTPModel = mongoose.models.OTP ||  mongoose.model("OTP",otpSchema, "otps")
 export default OTPModel;

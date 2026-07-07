@@ -21,6 +21,11 @@ const mediaSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+     secure_url: {
+        type:String,
+        required: true,
+        trim: true
+    },
     alt: {
         type:String,
         trim: true
@@ -39,5 +44,5 @@ const mediaSchema = new mongoose.Schema({
 // as soon as time end the otp expires and data get automatically delete 
 
 
-const MediaModel = mongoose.models.OTP ||  mongoose.model("Media",mediaSchema, "medias")
+const MediaModel = mongoose.models.Media ||  mongoose.model("Media",mediaSchema, "medias")
 export default MediaModel;

@@ -6,9 +6,9 @@ import { ADMIN_DASHBOARD, ADMIN_MEDIA_SHOW } from '../../../../../routes/AdminPa
 import UploadMedia from '../../../../../components/Application/Admin/UploadMedia'
 import {Card, CardContent, CardHeader} from "../../../../../../src/components/ui/card"
 import {Button} from "../../../../../../src/components/ui/button"
-
+import ButtonLoading from '../../../../../components/Application/LoadingButton'
 import axios from 'axios'
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query'
 import Media from '../../../../../components/Application/Admin/Media'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
@@ -21,6 +21,8 @@ const MediaPage = () => {
   const [deleteType, setDeleteType] = useState("SD")
   const [selectedMedia, setSelectedMedia] = useState([])
   const [selectAll,setSelectAll] = useState(false)
+
+  const queryClient = useQueryClient()
 
   const searchParams = useSearchParams()
 
@@ -38,7 +40,6 @@ const MediaPage = () => {
 
   const fetchMedia = async (page, deleteType) => {
     const {data: response} = await axios.get(`/api/media?page=${page}&limit="10"&deleteType=${deleteType}`)
-    console.log(response)
     return response;
   }
 
@@ -46,13 +47,17 @@ const MediaPage = () => {
   const {
     data,
     error,   
-    status
+    status,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage
   } = useInfiniteQuery({
     queryKey: ['media-data', deleteType],
     queryFn: async({pageParams}) => await fetchMedia(pageParams, deleteType),
     initialPageParam: 0,
     getNextPageParam: (lastPage, pages) => {
-      return lastPage.hasMore? nextPage : undefined
+      return lastPage.hasMore? pages.length : undefined
     },
   })
 
@@ -63,14 +68,16 @@ const MediaPage = () => {
 
 
     const deleteMutation = useDeleteMutation("media-data", "/api/media/delete")
-    const handleDelete = (selectedMedia, deleteType) => {
+
+
+    const handleDelete = (ids, deleteType) => {
       let c = true
       if(deleteType === "PD"){
         c = confirm("Are you sure you want to delete the data permanently?")
       }
 
       if(c){
-        deleteMutation.mutate({selectedMedia,deleteType})
+        deleteMutation.mutate({ids,deleteType})
       }
       setSelectAll(false)
       setSelectedMedia([])
@@ -101,7 +108,7 @@ const MediaPage = () => {
             {deleteType === "SD" ? "Media" : "Media Trash"}
           </h4>
           <div className='flex items-center gap-5'>
-            {deleteType === "SD" ? <UploadMedia />: ""}
+            {deleteType === "SD" ? <UploadMedia isMultiple={true} queryClient={queryClient} />: ""}
             <div className='flex gap-3'>
               {deleteType === "SD" ? 
               <Button type='button' variant="destructive">
@@ -121,7 +128,7 @@ const MediaPage = () => {
           </div>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className='pb-5'>
 
       {selectedMedia.length>0 &&
       <div className='py-2 px-3 bg-voilet-200 mb-2 rounded flex justify-between items-center'>
@@ -155,6 +162,9 @@ const MediaPage = () => {
 
 
 
+
+
+
       {status === "pending" ? 
           <div>Loading...</div>
         :
@@ -163,6 +173,9 @@ const MediaPage = () => {
             {error.message}
           </div>
           :
+
+          <>
+          
           <div className='grid lg:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 mb-5'>
             {
               data?.pages?.map((page,index)=> (
@@ -182,8 +195,12 @@ const MediaPage = () => {
               ))
             }
           </div>
+          </>
+          
       }
 
+      {hasNextPage &&
+      <ButtonLoading className="bg-primary/90 cursor-pointer" type="button" loading={isFetching} onClick={()=>fetchNextPage()} text="Load More"/> }
 
 
       </CardContent>

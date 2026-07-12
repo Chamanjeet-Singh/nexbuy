@@ -68,7 +68,7 @@ const Media = ({media, handleDelete, deleteType, selectedMedia, setSelectedMedia
                      </>
                    }
 
-                   <DropdownMenuItem asChild>
+                   <DropdownMenuItem asChild onClick={() => handleDelete([media._id], deleteType)}>
                         <Link href={ADMIN_MEDIA_EDIT(media._id)}>
                         <FaTrash color='red'/>
                         {deleteType === "SD" ? "Move into Trash" : "Delete Permanently"}

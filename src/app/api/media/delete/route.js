@@ -21,7 +21,7 @@ export async function PUT(request) {
             return response(false,400,"Invalid or Empty ids list.")
         }
 
-        const media = await MediaModel.find({id: {$in: ids}}).lean()//$in is used to match the arrays in mongodb
+        const media = await MediaModel.find({_id: {$in: ids}}).lean()//$in is used to match the arrays in mongodb
         if(!media.length){
             return response(false,404,"Data not found")
 
@@ -69,7 +69,7 @@ export async function DELETE(request) {
             return response(false,400,"Invalid or Empty ids list.")
         }
 
-        const media = await MediaModel.find({id: {$in: ids}}).session(session).lean()//$in is used to match the arrays in mongodb
+        const media = await MediaModel.find({_id: {$in: ids}}).session(session).lean()//$in is used to match the arrays in mongodb
         if(!media.length){
             return response(false,404,"Data not found")
 

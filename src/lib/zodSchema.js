@@ -1,3 +1,4 @@
+import { title } from "process"
 import {z} from "zod"
 
 export const zSchema = z.object({
@@ -26,5 +27,15 @@ export const zSchema = z.object({
     otp: z
       .string()
       .regex(/^\d{6}$/, "OTP must be exactly 6 digits"),
+
+    _id: z
+      .string()
+      .min(3, "ID is required"),
+    alt: z
+      .string()
+      .min(3, "Alt text is required"),
+    title: z
+      .string()
+      .min(3, "Title is required"),
     
 })

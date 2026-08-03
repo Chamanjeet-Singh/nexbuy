@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
-import { catchError,  response, isAuthenticated } from "../../../../lib/helperFunction"
+import { catchError,  response } from "../../../../lib/helperFunction"
+import { isAuthenticated } from "../../../../lib/authentication"
 import { connectDB } from "../../../../lib/dbConnect"
 import MediaModel from "../../../../models/Media.model"
 import cloudinary from "../../../../lib/cloudinary"

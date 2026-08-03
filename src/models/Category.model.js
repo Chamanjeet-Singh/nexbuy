@@ -21,10 +21,8 @@ const categorySchema = new mongoose.Schema({
         type:String,
         default:null,
         index: true
-    },
-
-
-},{timeStamp: true})
+    }
+},{ timestamps: true })
 
 const CategoryModel = mongoose.models.Category || mongoose.model("Category", categorySchema, "categories")
 export default CategoryModel;

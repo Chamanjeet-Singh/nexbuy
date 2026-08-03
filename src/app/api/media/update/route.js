@@ -1,7 +1,8 @@
 import { isValidObjectId } from "mongoose"
 import { zSchema } from "../../../../lib/zodSchema"
 import { connectDB } from "../../../../lib/dbConnect"
-import { catchError, isAuthenticated, response } from "../../../../lib/helperFunction"
+import { catchError, response } from "../../../../lib/helperFunction"
+import { isAuthenticated } from "../../../../lib/authentication"
 import MediaModel from "../../../../models/Media.model"
 
 export async function PUT(request) {

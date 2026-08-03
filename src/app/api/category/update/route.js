@@ -5,7 +5,7 @@ import { zSchema } from "../../../../lib/zodSchema"
 import CategoryModel from "../../../../models/Category.model"
 
 
-export async function POST(request) {
+export async function PUT(request) {
     try {
         const auth = await isAuthenticated("admin")
         if(!auth.isAuth){
@@ -16,6 +16,7 @@ export async function POST(request) {
 
         const payload = await request.json()
         const schema = zSchema.pick({
+                          _id: true,
                           name: true,
                           slug: true,
                          
@@ -27,13 +28,20 @@ export async function POST(request) {
            return response(false, 400, "Invalid or missing fields", validate.error)
         }
 
-        const { name , slug}  = validate.data;
-        const newCategory = new CategoryModel({
-            name, slug
-        }) 
-        await newCategory.save();
+        const {_id, name , slug}  = validate.data;
 
-        return response(true, 200, "Category added successfully", newCategory)
+        const getCategory = await CategoryModel.findById({deletedAt: null , _id});
+
+        if(!getCategory){
+            return response(false, 404 , "Can't find the Category")
+        }
+
+        getCategory.name = name,
+        getCategory.slug = slug
+
+        await getCategory.save()
+
+         return response(true, 200, "Category updated successfully")
                   
 
         

@@ -35,38 +35,34 @@ export const generateOtp =  () => {
 
 }
 
-import { cookies } from 'next/headers'
-import { jwtVerify } from 'jose'
-export const isAuthenticated = async (role) => {
-    try {
-        const cookieStore = await cookies()
 
 
-        if(!cookieStore.has("access_token")){
-            return {
-                isAuth: false
-        }}
-        const access_token = cookieStore.get("access_token")
 
-        const {payload} = await jwtVerify(access_token.value,new TextEncoder().encode(process.env.SECRET_KEY))
+export const columnConfig = (column, isCreatedAt = false, isUpdatedAt = false, isDeletedAt= false)=>{
 
-        if(payload.role !== "admin"){
-            return {
-                isAuth: false,
-               
-        }
-        }
+    const newColumn = [...column]
 
-        return {
-                isAuth: true,
-                 userId: payload._id
-            }
-    } 
-    catch (error) {
-        return {
-                isAuth: false,
-                error
-            }
-        
+    if(isCreatedAt){
+        newColumn.push({
+            accessorKey: 'createdAt',
+            header: 'Created At',
+            Cell: ({renderedCellValue}) => new Date(renderedCellValue).toLocaleString()
+        })
     }
+    if(isUpdatedAt){
+        newColumn.push({
+            accessorKey: 'updatedAt',
+            header: 'Updated At',
+            Cell: ({renderedCellValue}) => new Date(renderedCellValue).toLocaleString()
+        })
+    }
+    if(isDeletedAt){
+        newColumn.push({
+            accessorKey: 'deletedAt',
+            header: 'Deleted At',
+            Cell: ({renderedCellValue}) => new Date(renderedCellValue).toLocaleString()
+        })
+    }
+
+    return newColumn
 }

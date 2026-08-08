@@ -63,7 +63,7 @@ export async function DELETE(request) {
             return response(false,400,"Invalid or Empty ids list.")
         }
 
-        const category = await CategoryModel.find({_id: {$in: ids}}).session(session).lean()//$in is used to match the arrays in mongodb
+        const category = await CategoryModel.find({_id: {$in: ids}}).lean()//$in is used to match the arrays in mongodb
         if(!category.length){
             return response(false,404,"Data not found")
 

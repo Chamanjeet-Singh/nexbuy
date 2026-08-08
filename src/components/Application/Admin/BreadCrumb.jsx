@@ -28,7 +28,7 @@ const BreadCrumb = ({breadcrumbData}) => {
             :
             <React.Fragment key={index} >
                 <BreadcrumbItem>
-                    <BreadcrumbLink href={data.href}>{data.label}
+                    <BreadcrumbLink className="font-semibold" href={data.href}>{data.label}
                     </BreadcrumbLink>
                 </BreadcrumbItem>
             </React.Fragment>

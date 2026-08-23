@@ -1,4 +1,4 @@
-import { request } from "http"
+
 import { NextResponse } from "next/server"
 import {USER_DASHBOARD, WEBSITE_LOGIN} from "../src/routes/WebsiteRoute"
 import {ADMIN_DASHBOARD} from "../src/routes/AdminPanelRoute"
@@ -22,7 +22,7 @@ export async function middleware(request) {
 
         //verify tokens
         const access_token = request.cookies.get("access_token").value
-        const {payload} = await jwtVerify(access_token, new TextEncoder(process.env.SECRET_KEY))
+        const {payload} = await jwtVerify(access_token, new TextEncoder().encode(process.env.SECRET_KEY))
 
 
         const role = payload.role
@@ -51,7 +51,9 @@ export async function middleware(request) {
         return NextResponse.next() //allow access to the route if all conditions are met
 
     } catch (error) {
-        return NextResponse.redirect(new URL(WEBSITE_LOGIN, request.url))
+        const response = NextResponse.redirect(new URL(WEBSITE_LOGIN, request.url))
+        response.cookies.delete("access_token")
+        return response
         
     }
 }

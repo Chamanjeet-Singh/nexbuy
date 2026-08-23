@@ -40,5 +40,22 @@ export const zSchema = z.object({
     slug:z
         .string()
         .min(3,"Slug is required"),
+    category:z
+        .string()
+        .min(3,"Category is required"),
+    mrp: z.union([
+      z.number().positive("Expected a positive value,received a negative value"),
+      z.string().transform((val)=> Number(val)).refine((val) => !isNaN(val) && val >=0 , "Please enter a valid number")
+    ]),
+    sellingPrice: z.union([
+      z.number().positive("Expected a positive value,received a negative value"),
+      z.string().transform((val)=> Number(val)).refine((val) => !isNaN(val) && val >=0 , "Please enter a valid number")
+    ]),
+    discountPercentage: z.union([
+      z.number().min(0).max(100),
+      z.string().transform((val)=> Number(val)).refine((val) => !isNaN(val) && val >=0 && val <=100 , "Please enter a valid discount percentage")
+    ]),
+    description : z.string().min(3,"Description is required")
+    
     
 })

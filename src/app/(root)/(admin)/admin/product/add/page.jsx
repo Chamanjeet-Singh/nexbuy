@@ -63,9 +63,10 @@ const AddProduct = () => {
                   name: true,
                   slug: true,
                   mrp: true,
+                  category: true,
                   sellingPrice: true,
                   discountPercentage: true,
-                  media: true,
+                 
                   description: true,
                  
               })
@@ -76,10 +77,11 @@ const AddProduct = () => {
               defaultValues: {
                   name: "",
                   slug: "",
-                  mrp: "",
-                  sellingPrice: "",
-                  discountPercentage: "",
-                  media: "",
+                  category: "",
+                  mrp: 0,
+                  sellingPrice: 0,
+                  discountPercentage: 0,
+                 
                   description: "",
               },
             })
@@ -93,6 +95,16 @@ const AddProduct = () => {
 
             },
         [form.watch("name")])
+
+        //discount percentage calculation
+        useEffect(()=>{
+          const mrp = form.getValues("mrp") || 0
+          const sellingPrice = form.getValues("sellingPrice") || 0
+          
+
+          const discountPercentage = mrp > 0 ? ((mrp - sellingPrice) / mrp) * 100 : 0
+          form.setValue("discountPercentage", Math.round(discountPercentage))
+        },[form.watch("mrp"), form.watch("sellingPrice")])
 
 
 
@@ -108,6 +120,13 @@ const AddProduct = () => {
     const onSubmit = async (values)=> {
         setLoading(true)
         try {
+
+          if(selectedMedia.length <=0){
+            showToast("error","Please select media")
+          }
+
+          const mediaIds = selectedMedia.map(media =>media._id)
+          values.media = mediaIds
             const {data : response} = await axios.post("/api/product/create",values)
             if(!response.success){
                 throw new Error(response.message)
@@ -270,6 +289,7 @@ const AddProduct = () => {
                         <Input
                           {...field}
                           type = "number"
+                          readOnly
                           id="form-rhf-demo-title"
                           aria-invalid={fieldState.invalid}
                           placeholder="Enter Discount Percentage"

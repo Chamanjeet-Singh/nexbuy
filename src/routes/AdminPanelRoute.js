@@ -18,6 +18,24 @@ export const ADMIN_CATEGORY_EDIT = (id) => id ? `/admin/category/edit/${id}` : `
 export const ADMIN_PRODUCT_ADD = "/admin/product/add"
 export const ADMIN_PRODUCT_SHOW = "/admin/product"
 export const ADMIN_PRODUCT_EDIT = (id) => id ? `/admin/product/edit/${id}` : ` `
+
+
+
+// PRODUCT VARIANT ROUTES
+
+export const ADMIN_PRODUCT_VARIANT_ADD = "/admin/product-variant/add"
+export const ADMIN_PRODUCT_VARIANT_SHOW = "/admin/product-variant"
+export const ADMIN_PRODUCT_VARIANT_EDIT = (id) => id ? `/admin/product-variant/edit/${id}` : ` `
+
+
+
+//COUPON ROUTES
+
+export const ADMIN_COUPON_ADD = "/admin/coupon/add"
+export const ADMIN_COUPON_SHOW = "/admin/coupon"
+export const ADMIN_COUPON_EDIT = (id) => id ? `/admin/coupon/edit/${id}` : ` `
+
+
 //Trash Routes
 
 export const ADMIN_TRASH = "/admin/trash"

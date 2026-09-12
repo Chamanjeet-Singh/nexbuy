@@ -239,7 +239,7 @@ const Datatable = ({
         renderRowActionMenuItems: ({row}) => createAction(row, deleteType, handleDelete),
 
         renderTopToolbarCustomActions: ({table}) => (
-            <Tooltip>
+            <Tooltip title="Export data">
                 <LoadingButton 
                 type="button" 
                 text={<> <FileDownloadIcon fontSize='25'/> Export</>}

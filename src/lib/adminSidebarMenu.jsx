@@ -9,7 +9,7 @@ import { LuUserRound } from "react-icons/lu";
 import { IoMdStarOutline } from "react-icons/io";
 import { MdOutlinePermMedia } from "react-icons/md";
 import { RiCoupon2Line } from "react-icons/ri";
-import { ADMIN_DASHBOARD, ADMIN_MEDIA_SHOW, ADMIN_CATEGORY_ADD, ADMIN_CATEGORY_SHOW, ADMIN_CATEGORY_EDIT, ADMIN_PRODUCT_ADD , ADMIN_PRODUCT_SHOW} from "../routes/AdminPanelRoute";
+import { ADMIN_DASHBOARD, ADMIN_MEDIA_SHOW, ADMIN_CATEGORY_ADD, ADMIN_CATEGORY_SHOW, ADMIN_CATEGORY_EDIT, ADMIN_PRODUCT_ADD , ADMIN_PRODUCT_SHOW, ADMIN_PRODUCT_VARIANT_SHOW, ADMIN_PRODUCT_VARIANT_ADD, ADMIN_COUPON_ADD, ADMIN_COUPON_SHOW} from "../routes/AdminPanelRoute";
 import { title } from "process";
 
 export const adminAppSidebarMenu  = [
@@ -44,7 +44,7 @@ export const adminAppSidebarMenu  = [
             },
             {
                 title: "Add Variant",
-                url: "#"
+                url: ADMIN_PRODUCT_VARIANT_ADD
             }, 
             {
                 title: "All Products",
@@ -52,7 +52,7 @@ export const adminAppSidebarMenu  = [
             },
             {
                 title: "Product Variants",
-                url: "#"
+                url: ADMIN_PRODUCT_VARIANT_SHOW
             }
         ]
     },
@@ -63,11 +63,11 @@ export const adminAppSidebarMenu  = [
         submenu: [
             {
                 title: "Add Coupon",
-                url: "#"
+                url: ADMIN_COUPON_ADD
             },
             {
                 title: "All Coupons",
-                url: "#"
+                url: ADMIN_COUPON_SHOW
             }
         ]
     },

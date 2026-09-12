@@ -55,7 +55,19 @@ export const zSchema = z.object({
       z.number().min(0).max(100),
       z.string().transform((val)=> Number(val)).refine((val) => !isNaN(val) && val >=0 && val <=100 , "Please enter a valid discount percentage")
     ]),
-    description : z.string().min(3,"Description is required")
+    description : z.string().min(3,"Description is required"),
+    media: z.array(z.string()),
+    product: z.string().min(3,"Product is required"),
+    sku: z.string().min(3,"SKU is required"),
+    color: z.string().min(3,"Color is required"),
+    size: z.string().min(1,"Size is required"),
+    code: z.string().min(3,"code is required"),
+    minShoppingAmount: z.union([
+      z.number().min(0),
+      z.string().transform((val)=> Number(val)).refine((val) => !isNaN(val) && val >=0, "Please enter a valid Shopping Amount ")
+    ]),
+    validity: z.coerce.date()
+
     
     
 })

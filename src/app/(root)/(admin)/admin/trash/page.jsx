@@ -11,7 +11,7 @@ import EditAction from "../../../../../components/Application/Admin/EditAction"
 import DeleteAction from "../../../../../components/Application/Admin/DeleteAction"
 import DatatableWrapper from "../../../../../components/Application/Admin/DateTableWrapper"
 import { columnConfig } from "../../../../../lib/helperFunction"
-import { DT_CATEGORY_COLUMNS } from "../../../../../lib/column"
+import { DT_CATEGORY_COLUMNS , DT_COUPON_COLUMNS, DT_PRODUCT_COLUMNS, DT_PRODUCT_VARIANT_COLUMNS} from "../../../../../lib/column"
 import { useSearchParams } from 'next/navigation'
 
 
@@ -33,7 +33,33 @@ const TRASH_CONFIG = {
     fetchUrl: "/api/category",
     exportUrl: "/api/category/export",
     deleteUrl: "/api/category/delete",
+  },
+
+  product: {
+    title: "Product Trash",
+    columns: DT_PRODUCT_COLUMNS,
+    fetchUrl: "/api/product",
+    exportUrl: "/api/product/export",
+    deleteUrl: "/api/product/delete",
+  },
+
+  "product-variant": {
+    title: "Product Variant Trash",
+    columns: DT_PRODUCT_VARIANT_COLUMNS,
+    fetchUrl: "/api/product-variant",
+    exportUrl: "/api/product-variant/export",
+    deleteUrl: "/api/product-variant/delete",
+  },
+
+   "coupon": {
+    title: "Coupon Trash",
+    columns: DT_COUPON_COLUMNS,
+    fetchUrl: "/api/coupon",
+    exportUrl: "/api/coupon/export",
+    deleteUrl: "/api/coupon/delete",
   }
+
+
 }
 
 const Trash = () => {

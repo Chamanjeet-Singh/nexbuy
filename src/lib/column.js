@@ -1,5 +1,7 @@
-import { Chip } from '@mui/material'
+import { Avatar, AvatarImage } from '../components/ui/avatar'
 import dayjs from 'dayjs'
+import userIcon from "../../public/assets/images/user.png"
+import { Chip } from '@mui/material'
 
 export const DT_CATEGORY_COLUMNS = [
     {
@@ -93,4 +95,72 @@ export const DT_COUPON_COLUMNS = [
         }
     }
 ]
+
+
+export const DT_CUSTOMERS_COLUMNS = [
+    {
+         accessorKey: 'avatar', //access nested data with dot notation
+        header: 'Avatar',
+        Cell: ({renderedCellValue}) => {
+           return ( <Avatar>
+                <AvatarImage src={renderedCellValue?.url || userIcon.src} alt="Avatar" />
+            </Avatar>)
+        }
+    },
+    {
+         accessorKey: 'name', //access nested data with dot notation
+        header: 'Name',
+    },
+    {
+         accessorKey: 'email', //access nested data with dot notation
+        header: 'Email',
+    },
+    {
+         accessorKey: 'phone', //access nested data with dot notation
+        header: 'Phone',
+    },
+    {
+         accessorKey: 'address', //access nested data with dot notation
+        header: 'Address',
+    },
+    {
+         accessorKey: 'isEmailVerified', //access nested data with dot notation
+        header: 'Is Verified',
+        Cell: ({renderedCellValue}) => {
+           return renderedCellValue ? <Chip color="success" label="Verified"/> : <Chip color="error" label="Not Verified"/>
+        }
+    }
+]
+
+
+
+export const DT_REVIEW_COLUMNS = [
+   
+    {
+         accessorKey: 'product', //access nested data with dot notation
+        header: 'Product',
+    },
+    {
+            accessorKey: 'user', //access nested data with dot notation
+        header: 'User', 
+    },
+     {
+         accessorKey: 'title', //access nested data with dot notation
+        header: 'Title',
+    },
+    {
+         accessorKey: 'rating', //access nested data with dot notation
+        header: 'Rating',
+    },
+   
+    {
+         accessorKey: 'review', //access nested data with dot notation
+        header: 'Review',
+    }
+    
+    
+]
+    
+   
+
        

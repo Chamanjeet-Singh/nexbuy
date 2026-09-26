@@ -7,7 +7,7 @@ import { IoShirtOutline } from "react-icons/io5";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { LuUserRound } from "react-icons/lu";
 import useFetch from "@/hooks/useFetch"
-import {ADMIN_CATEGORY_SHOW, ADMIN_PRODUCT_SHOW, ADMIN_CUSTOMERS_SHOW} from "../../../../../lib/adminSidebarMenu"
+import {ADMIN_CATEGORY_SHOW, ADMIN_PRODUCT_SHOW, ADMIN_CUSTOMERS_SHOW} from "../../../../../routes/AdminPanelRoute"
 
 
 

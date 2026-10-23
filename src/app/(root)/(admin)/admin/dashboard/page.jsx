@@ -5,6 +5,9 @@ import { Card, CardHeader, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { OrderOverview } from './OrderOverview'
+import { OrderStatus } from './OrderStatus'
+import LatestOrders from './LatestOrders'
+import LatestReview from './LatestReview'
 
 const AdminDashboard = () => {
   return (
@@ -22,16 +25,22 @@ const AdminDashboard = () => {
               </Button>
             </div>
           </CardHeader>
+
+
+
           <CardContent>
           <OrderOverview />
         </CardContent>
         </Card>
+
         
 
 
 
+        
+
         <Card className='rounded-lg  lg:w-[30%] w-full p-0'>
-          <CardHeader className='py-3'>
+          <CardHeader className='py-3 border [.border-b]:pb-3'>
             <div className='flex justify-between items-center'>
               <span className='font-semibold'>Order Summary</span>
               <Button type='button'>
@@ -39,7 +48,58 @@ const AdminDashboard = () => {
               </Button>
             </div>
           </CardHeader>
+
+          <CardContent>
+          <OrderStatus />
+        </CardContent>
         </Card>
+
+        
+
+      </div>
+
+
+       <div className='mt-10 flex lg:flex-nowrap flex-wrap gap-10'>
+        <Card className='rounded-lg  lg:w-[70%] w-full p-0 block'>
+          <CardHeader className='py-3 border [.border-b]:pb-3'>
+            <div className='flex justify-between items-center'>
+              <span className='font-semibold'>Latest Orders</span>
+              <Button type='button'>
+                <Link href="">View All</Link>
+              </Button>
+            </div>
+          </CardHeader>
+
+
+
+          <CardContent className='pt-3 lg:h-[350px] overflow-auto'>
+          <LatestOrders />
+        </CardContent>
+        </Card>
+
+        
+
+
+
+        
+
+        <Card className='rounded-lg  lg:w-[30%] w-full p-0 block'>
+          <CardHeader className='py-3 border [.border-b]:pb-3'>
+            <div className='flex justify-between items-center'>
+              <span className='font-semibold'>Latest Reviews</span>
+              <Button type='button'>
+                <Link href="">View All</Link>
+              </Button>
+            </div>
+          </CardHeader>
+
+          <CardContent className='pt-3 px-1 lg:h-[350px] overflow-auto'>
+          <LatestReview />
+        </CardContent>
+        </Card>
+
+        
+
       </div>
     </div>
     

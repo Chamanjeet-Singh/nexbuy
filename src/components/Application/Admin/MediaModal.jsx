@@ -8,6 +8,7 @@ import loading from "../../../../public/assets/images/loading.svg"
 import axios from 'axios'
 import ModalMediaBlock from './ModalMediaBlock'
 import { showToast } from '../../../lib/showToast'
+import  LoadingButton  from "../../Application/LoadingButton"
 
 
 
@@ -66,7 +67,7 @@ const MediaModal = ({open, setOpen, selectedMedia, setSelectedMedia, isMultiple}
                 className='sm:max-w-[80%] h-screen p-0 py-10 bg-transparent border-0 shadow-none'>
 
                     <DialogDescription className='hidden'></DialogDescription>
-                    <div className='h-[90vh] bg-wide p-3 rounded shadow'>
+                    <div className='h-[90vh] bg-white dark:bg-card p-3 rounded shadow'>
                         <DialogHeader className='h-8 border-b'>
                             <DialogTitle>Media Selection</DialogTitle>
                         </DialogHeader>
@@ -109,6 +110,14 @@ const MediaModal = ({open, setOpen, selectedMedia, setSelectedMedia, isMultiple}
                                             }
                                     </div>
 
+
+                                   {hasNextPage ? 
+                                   <div className='flex justify-center py-5'>
+                                        <LoadingButton type="button" onClick={()=> fetchNextPage()} loading={isFetching} text="Load More"/>
+                                   </div>
+                                   :
+                                   <p className='text-center py-5'>Nothing more to load.</p>
+                                   }
 
                                     </>
                                     

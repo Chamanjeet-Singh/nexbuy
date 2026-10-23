@@ -21,7 +21,7 @@ const CountOverview = () => {
             <div className='flex items-center justify-between p-3 rounded-lg border shadow border-l-4 border-l-green-400 bg-white
              dark:bg-card dark:border-gray-800 dark:border-l-green-400'>
                 <div>
-                    <h4 className='font-medium text-gray-500'>Total Categories</h4>
+                    <h4 className='font-medium text-gray-500 dark:text-white'>Total Categories</h4>
                     <span className='text-xl font-bold'>{countData?.data?.category || 0}</span>
                 </div>
                 <div>
@@ -36,7 +36,7 @@ const CountOverview = () => {
             <div className='flex items-center justify-between p-3 rounded-lg border shadow border-l-4 border-l-blue-400 bg-white
              dark:bg-card dark:border-gray-800 dark:border-l-blue-400'>
                 <div>
-                    <h4 className='font-medium text-gray-500'>Total Product</h4>
+                    <h4 className='font-medium text-gray-500 dark:text-white'>Total Product</h4>
                     <span className='text-xl font-bold'>{countData?.data?.product || 0}</span>
                 </div>
                 <div>
@@ -51,7 +51,7 @@ const CountOverview = () => {
             <div className='flex items-center justify-between p-3 rounded-lg border shadow border-l-4 border-l-yellow-400 bg-white
              dark:bg-card dark:border-gray-800 dark:border-l-yellow-400'>
                 <div>
-                    <h4 className='font-medium text-gray-500'>Total Customers</h4>
+                    <h4 className='font-medium text-gray-500 dark:text-white'>Total Customers</h4>
                     <span className='text-xl font-bold'>{countData?.data?.customer || 0}</span>
                 </div>
                 <div>
@@ -67,7 +67,7 @@ const CountOverview = () => {
             <div className='flex items-center justify-between p-3 rounded-lg border shadow border-l-4 border-l-cyan-400 bg-white
              dark:bg-card dark:border-gray-800 dark:border-l-cyan-400'>
                 <div>
-                    <h4 className='font-medium text-gray-500'>Total Orders</h4>
+                    <h4 className='font-medium text-gray-500 dark:text-white'>Total Orders</h4>
                     <span className='text-xl font-bold'>0</span>
                 </div>
                 <div>

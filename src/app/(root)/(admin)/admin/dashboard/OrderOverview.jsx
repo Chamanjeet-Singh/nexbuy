@@ -21,25 +21,25 @@ import {
 export const description = "A bar chart"
 
 const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
-  { month: "July", desktop: 305 },  
-  { month: "August", desktop: 237 },
-  { month: "September", desktop: 73 },
-  { month: "October", desktop: 209 },
-  { month: "November", desktop: 186 },
-  { month: "December", desktop: 305 },
+  { month: "January", amount: 186 },
+  { month: "February", amount: 305 },
+  { month: "March", amount: 237 },
+  { month: "April", amount: 73 },
+  { month: "May", amount: 209 },
+  { month: "June", amount: 214 },
+  { month: "July", amount: 305 },  
+  { month: "August", amount: 237 },
+  { month: "September", amount: 73 },
+  { month: "October", amount: 209 },
+  { month: "November", amount: 186 },
+  { month: "December", amount: 305 },
 
 ]
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "var(--chart-1)",
+  amount: {
+    label: "Amount",
+    color: "#d08700",
   },
 }
 
@@ -57,9 +57,9 @@ export function OrderOverview() {
             />
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent hideLabel />}
+              content={<ChartTooltipContent/>}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8} />
+            <Bar dataKey="amount" fill="var(--color-amount)" radius={5} />
           </BarChart>
         </ChartContainer>
   )

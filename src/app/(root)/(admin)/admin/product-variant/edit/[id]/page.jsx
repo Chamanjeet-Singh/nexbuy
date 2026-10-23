@@ -188,7 +188,7 @@ const EditProduct = ({params}) => {
       <CardContent className='pb-5'>
       <form id="form-rhf-demo"  onSubmit={form.handleSubmit(onSubmit)} >
                  
-                  <FieldGroup className='grid md:grid-cols-2 gap-5'>
+                  <FieldGroup className='grid md:grid-cols-2 grid-cols-1 gap-5'>
                  
                   <Controller
                     name="name"

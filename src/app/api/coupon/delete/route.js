@@ -73,7 +73,7 @@ export async function DELETE(request) {
 
 
         //delete data from mongodb
-        await ProductModel.deleteMany({_id : {$in : ids}})
+        await CouponModel.deleteMany({_id : {$in : ids}})
 
 
         return response(true, 200, "Data deleted Permanently")
